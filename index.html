@@ -522,7 +522,7 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
         fbp: getCookie('_fbp'),
         fbc: getCookie('_fbc')
       };
-      const blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
+      const blob = new Blob([JSON.stringify(payload)], {type:'text/plain'});
       if (navigator.sendBeacon){
         navigator.sendBeacon(CAPI_ENDPOINT, blob);
       } else {
