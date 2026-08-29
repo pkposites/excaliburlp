@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Excalibur Festas e Eventos — Orçamento para o seu evento</title>
+<meta name="description" content="Casamentos e eventos corporativos em um espaço completo, há 15 anos em Santa Cruz da Serra, Duque de Caxias.">
+<link rel="icon" href="assets/img/logo-mark.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y8i6p65zi2");
+</script>
+
+<style>
+  :root{
+    --ink:#14110d;
+    --ink-2:#1d1811;
+    --ink-3:#28211a;
+    --gold:#c9a227;
+    --gold-light:#ecd188;
+    --parchment:#f4ecda;
+    --wine:#7c2430;
+    --line: rgba(201,162,39,0.28);
+    --shadow: 0 20px 50px rgba(0,0,0,0.45);
+    --maxw: 520px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,video{max-width:100%;display:block;}
+
+  h1,h2,h3,.eyebrow,.seal-title{font-family:'Cinzel', serif;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    position:relative;
+    background:var(--ink);
+    min-height:100vh;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0;
+    z-index:40;
+    display:flex; justify-content:center;
+  }
+  .topbar-inner{
+    width:100%; max-width:var(--maxw);
+    display:flex; align-items:center; gap:10px;
+    padding:14px 18px;
+    background:linear-gradient(180deg, rgba(20,17,13,0.92), rgba(20,17,13,0));
+  }
+  .topbar img{width:34px;height:34px;border-radius:50%;box-shadow:0 0 0 1px var(--line);}
+  .topbar span{
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    font-weight:600;
+  }
+
+  /* ---------- ornamental divider ---------- */
+  .flourish{
+    display:flex; align-items:center; justify-content:center;
+    gap:10px; margin:0 auto; padding:34px 0 26px;
+    color:var(--gold);
+  }
+  .flourish::before,.flourish::after{
+    content:"";
+    height:1px; width:38px;
+    background:linear-gradient(90deg, transparent, var(--line));
+  }
+  .flourish::after{background:linear-gradient(90deg, var(--line), transparent);}
+  .flourish svg{width:14px;height:14px;flex-shrink:0;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    height:100svh;
+    min-height:560px;
+    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+  }
+  .hero video, .hero .poster{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .hero-scrim{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(20,17,13,0.55) 0%, rgba(20,17,13,0.15) 30%, rgba(20,17,13,0.35) 55%, rgba(20,17,13,0.96) 96%);
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    padding:0 26px 42px;
+    text-align:center;
+    width:100%;
+  }
+  .hero-badge{
+    width:64px;height:64px;border-radius:50%;
+    margin:0 auto 18px;
+    box-shadow:0 0 0 1px var(--line), var(--shadow);
+  }
+  .hero h1{
+    font-size:clamp(30px,8vw,40px);
+    line-height:1.18;
+    font-weight:600;
+    color:var(--parchment);
+    margin:0 0 14px;
+    text-wrap:balance;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--gold-light);
+  }
+  .hero p{
+    font-size:15px;
+    line-height:1.55;
+    color:rgba(244,236,218,0.82);
+    max-width:360px;
+    margin:0 auto 26px;
+  }
+  .scroll-cue{
+    display:inline-flex; flex-direction:column; align-items:center; gap:6px;
+    font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold-light); opacity:.85;
+  }
+  .scroll-cue .bar{
+    width:1px; height:26px;
+    background:linear-gradient(180deg, var(--gold-light), transparent);
+    animation:pulse-down 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse-down{
+    0%{transform:scaleY(0.3);transform-origin:top;opacity:.4;}
+    50%{transform:scaleY(1);transform-origin:top;opacity:1;}
+    100%{transform:scaleY(0.3);transform-origin:top;opacity:.4;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:0 24px;}
+  .eyebrow{
+    font-size:11.5px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--gold); text-align:center; margin:0 0 12px; font-weight:600;
+  }
+  h2{
+    font-size:24px; line-height:1.3; font-weight:600;
+    color:var(--parchment); text-align:center; margin:0 0 14px;
+  }
+  .lede{
+    font-size:14.5px; line-height:1.65; color:rgba(244,236,218,0.72);
+    text-align:center; max-width:380px; margin:0 auto 26px;
+  }
+
+  /* ---------- media block (venue / decor) ---------- */
+  .media-frame{
+    position:relative;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:var(--shadow), 0 0 0 1px var(--line);
+    aspect-ratio: 3/4;
+  }
+  .media-frame video, .media-frame img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .media-frame .tag{
+    position:absolute; left:14px; bottom:14px;
+    font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold-light);
+    background:rgba(20,17,13,0.55);
+    border:1px solid var(--line);
+    padding:6px 12px; border-radius:100px;
+    backdrop-filter:blur(4px);
+  }
+
+  /* ---------- diferenciais ---------- */
+  .diferenciais{
+    display:grid; grid-template-columns:1fr 1fr; gap:12px;
+    margin-top:8px;
+  }
+  .dif-card{
+    border:1px solid var(--line);
+    background:linear-gradient(160deg, var(--ink-3), var(--ink-2));
+    border-radius:14px;
+    padding:18px 14px;
+    text-align:center;
+  }
+  .dif-card svg{width:22px;height:22px;color:var(--gold); margin-bottom:10px;}
+  .dif-card strong{
+    display:block; font-size:13.5px; color:var(--parchment);
+    font-weight:700; margin-bottom:3px;
+  }
+  .dif-card small{
+    display:block; font-size:11.5px; color:rgba(244,236,218,0.6); line-height:1.4;
+  }
+
+  /* ---------- seal / qualification block ---------- */
+  .seal-block{
+    border:1px solid var(--line);
+    background:radial-gradient(120% 140% at 50% 0%, rgba(201,162,39,0.10), transparent 60%), var(--ink-2);
+    border-radius:20px;
+    padding:30px 22px 26px;
+    text-align:center;
+  }
+  .seal-title{
+    font-size:19px; color:var(--parchment); font-weight:600; margin:0 0 8px;
+  }
+  .seal-sub{
+    font-size:13.5px; color:rgba(244,236,218,0.65); line-height:1.55;
+    max-width:340px; margin:0 auto 24px;
+  }
+
+  .seal-toggle{
+    display:flex; align-items:center; gap:14px;
+    text-align:left;
+    background:rgba(0,0,0,0.22);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    cursor:pointer;
+    user-select:none;
+    width:100%;
+    font-family:'Manrope', sans-serif;
+    appearance:none;
+    -webkit-appearance:none;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .seal-toggle.is-sealed{
+    border-color:rgba(201,162,39,0.65);
+    background:rgba(201,162,39,0.08);
+  }
+  .seal-mark{
+    flex:0 0 auto;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    transition:transform .45s cubic-bezier(.34,1.56,.64,1);
+  }
+  .seal-mark svg{
+    width:20px;height:20px;color:var(--gold);
+    opacity:0; transform:scale(.4);
+    transition:opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .seal-toggle.is-sealed .seal-mark{
+    background:var(--gold);
+    transform:rotate(-8deg) scale(1.05);
+    box-shadow:0 0 0 4px rgba(201,162,39,0.18);
+  }
+  .seal-toggle.is-sealed .seal-mark svg{opacity:1; transform:scale(1); color:var(--ink);}
+  .seal-label{font-size:13px; line-height:1.5; color:rgba(244,236,218,0.85);}
+  .seal-label b{color:var(--parchment);}
+
+  .cta-btn{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    width:100%;
+    margin-top:20px;
+    padding:16px 20px;
+    border-radius:100px;
+    border:none;
+    font-family:'Manrope', sans-serif;
+    font-size:15px; font-weight:700;
+    letter-spacing:.01em;
+    cursor:pointer;
+    background:var(--ink-3);
+    color:rgba(244,236,218,0.4);
+    transition:all .3s ease;
+  }
+  .cta-btn svg{width:18px;height:18px;}
+  .cta-btn.is-active{
+    background:linear-gradient(135deg, var(--gold-light), var(--gold));
+    color:var(--ink);
+    box-shadow:0 12px 30px rgba(201,162,39,0.28);
+  }
+  .cta-btn.is-active:active{transform:scale(.98);}
+  .cta-hint{
+    font-size:11.5px; color:rgba(244,236,218,0.45);
+    margin-top:12px;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:40px 24px 130px;
+    text-align:center;
+  }
+  footer img{width:52px;height:52px;border-radius:50%;margin:0 auto 14px;box-shadow:0 0 0 1px var(--line);}
+  footer .fname{
+    font-family:'Cinzel', serif; font-size:14px; letter-spacing:.06em;
+    color:var(--gold-light); margin-bottom:6px;
+  }
+  footer .faddr{font-size:12px; color:rgba(244,236,218,0.5); line-height:1.6;}
+
+  /* ---------- sticky bar ---------- */
+  .sticky-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:50;
+    display:flex; justify-content:center;
+    padding:14px 18px calc(14px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg, rgba(20,17,13,0), rgba(20,17,13,0.94) 30%);
+  }
+  .sticky-inner{width:100%; max-width:var(--maxw);}
+  .sticky-btn{
+    width:100%;
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    padding:15px 18px;
+    border-radius:100px;
+    border:none;
+    font-family:'Manrope', sans-serif;
+    font-size:14.5px; font-weight:700;
+    cursor:pointer;
+    background:var(--ink-3);
+    color:rgba(244,236,218,0.45);
+    box-shadow:var(--shadow);
+    transition:all .3s ease;
+  }
+  .sticky-btn.is-active{
+    background:linear-gradient(135deg, var(--gold-light), var(--gold));
+    color:var(--ink);
+  }
+  .sticky-btn svg{width:17px;height:17px;}
+
+  @media (min-width:521px){
+    body{background:#0b0906;}
+    .wrap{box-shadow:0 0 80px rgba(0,0,0,0.6);}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .scroll-cue .bar{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <img src="assets/img/logo-mark.png" alt="Excalibur Festas e Eventos">
+    <span>Excalibur Festas &amp; Eventos</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0;">
+    <video class="poster" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.jpg">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <h1>Onde a sua história<br>vira <em>lenda</em>.</h1>
+      <p>Casamentos e eventos corporativos em um espaço completo, há 15 anos em Santa Cruz da Serra.</p>
+      <span class="scroll-cue"><span class="bar"></span>conheça o espaço</span>
+    </div>
+  </section>
+
+  <!-- ESPAÇO -->
+  <section>
+    <div class="flourish" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2.2 6.8H21l-5.6 4.1 2.2 6.8L12 15.6l-5.6 4.1 2.2-6.8L3 8.8h6.8z"/></svg>
+    </div>
+    <p class="eyebrow">O espaço</p>
+    <h2>Uma estrutura para cada capítulo</h2>
+    <p class="lede">Salão completo, estrutura própria e equipe dedicada — do início ao brinde final, para casamentos, aniversários e eventos corporativos.</p>
+    <div class="media-frame">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/img/venue-poster.jpg">
+        <source src="assets/video/venue.mp4" type="video/mp4">
+      </video>
+      <span class="tag">Excalibur · Espaço completo</span>
+    </div>
+  </section>
+
+  <!-- DETALHES -->
+  <section>
+    <div class="flourish" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2.2 6.8H21l-5.6 4.1 2.2 6.8L12 15.6l-5.6 4.1 2.2-6.8L3 8.8h6.8z"/></svg>
+    </div>
+    <p class="eyebrow">Os detalhes</p>
+    <h2>Cada detalhe, com propósito</h2>
+    <p class="lede">Da decoração à mesa de doces — nada aqui é por acaso.</p>
+    <div class="media-frame">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/img/decor-poster.jpg">
+        <source src="assets/video/decor.mp4" type="video/mp4">
+      </video>
+      <span class="tag">Excalibur · Decoração</span>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section style="margin-top:38px;">
+    <div class="diferenciais">
+      <div class="dif-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2.2 6.8H21l-5.6 4.1 2.2 6.8L12 15.6l-5.6 4.1 2.2-6.8L3 8.8h6.8z"/></svg>
+        <strong>15 anos</strong>
+        <small>de experiência em festas e eventos</small>
+      </div>
+      <div class="dif-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V10l8-6 8 6v11"/><path d="M4 21h16"/><path d="M9 21v-6h6v6"/></svg>
+        <strong>Espaço completo</strong>
+        <small>estrutura própria, do zero ao evento pronto</small>
+      </div>
+      <div class="dif-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-3-3.87"/><path d="M4 21v-2a4 4 0 013-3.87"/><circle cx="12" cy="7" r="4"/></svg>
+        <strong>Casamentos &amp; corporativo</strong>
+        <small>dois formatos, o mesmo padrão de cuidado</small>
+      </div>
+      <div class="dif-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <strong>Santa Cruz da Serra</strong>
+        <small>Duque de Caxias, RJ</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELO / QUALIFICAÇÃO -->
+  <section style="margin-top:44px;">
+    <div class="seal-block">
+      <p class="seal-title">Vamos falar sobre o seu evento</p>
+      <p class="seal-sub">Para te atender com atenção, confirme abaixo — assim já entendemos que é um orçamento real.</p>
+
+      <button type="button" class="seal-toggle" id="sealToggle" aria-pressed="false">
+        <span class="seal-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="seal-label"><b>Tenho interesse</b> em receber um orçamento personalizado para o meu evento com a Excalibur.</span>
+      </button>
+
+      <button class="cta-btn" id="ctaBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.83 14.03c-.25.7-1.24 1.29-2.03 1.46-.55.12-1.26.21-3.66-.79-3.07-1.27-5.05-4.39-5.2-4.6-.15-.2-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.54.28-.3.61-.38.82-.38.2 0 .41 0 .59.01.19.01.44-.07.69.53.25.6.86 2.08.94 2.23.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.76 1.26 1.64 2.04 1.13.99 2.07 1.31 2.37 1.46.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.68-.15.28.1 1.75.83 2.05.98.3.15.5.23.57.35.08.13.08.73-.17 1.43z"/></svg>
+        <span id="ctaLabel">Confirme acima para continuar</span>
+      </button>
+      <p class="cta-hint">Você será direcionado ao WhatsApp da Excalibur.</p>
+    </div>
+  </section>
+
+  <footer>
+    <img src="assets/img/logo-mark.png" alt="Excalibur Festas e Eventos">
+    <div class="fname">EXCALIBUR FESTAS &amp; EVENTOS</div>
+    <div class="faddr">Santa Cruz da Serra · Duque de Caxias, RJ<br>Serviço de festas e entretenimento</div>
+  </footer>
+
+</div>
+
+<div class="sticky-bar">
+  <div class="sticky-inner">
+    <button class="sticky-btn" id="stickyBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.83 14.03c-.25.7-1.24 1.29-2.03 1.46-.55.12-1.26.21-3.66-.79-3.07-1.27-5.05-4.39-5.2-4.6-.15-.2-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.54.28-.3.61-.38.82-.38.2 0 .41 0 .59.01.19.01.44-.07.69.53.25.6.86 2.08.94 2.23.08.15.13.33.03.53-.1.2-.15.33-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.76 1.26 1.64 2.04 1.13.99 2.07 1.31 2.37 1.46.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.68-.15.28.1 1.75.83 2.05.98.3.15.5.23.57.35.08.13.08.73-.17 1.43z"/></svg>
+      <span id="stickyLabel">Confirme o interesse acima</span>
+    </button>
+  </div>
+</div>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1916536729320394');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel -->
+
+<script>
+(function(){
+  const PIXEL_ID = '1916536729320394';
+  const CAPI_ENDPOINT = 'https://capi-excalibur.robson-oc96.workers.dev/event';
+  const WHATSAPP_NUMBER = '5521968673436';
+  const WHATSAPP_MSG = 'Olá! Vim pela página da Excalibur e tenho interesse em um orçamento para o meu evento.';
+
+  const sealToggle = document.getElementById('sealToggle');
+  const ctaBtn = document.getElementById('ctaBtn');
+  const ctaLabel = document.getElementById('ctaLabel');
+  const stickyBtn = document.getElementById('stickyBtn');
+  const stickyLabel = document.getElementById('stickyLabel');
+
+  let sealed = false;
+  let qualifiedFired = false;
+
+  function uuid(){
+    if (crypto.randomUUID) return crypto.randomUUID();
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c=>{
+      const r = Math.random()*16|0, v = c=='x'?r:(r&0x3|0x8);
+      return v.toString(16);
+    });
+  }
+
+  function getCookie(name){
+    const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+
+  function sendServerEvent(eventName, eventId){
+    try{
+      const payload = {
+        pixel_id: PIXEL_ID,
+        event_name: eventName,
+        event_id: eventId,
+        event_source_url: window.location.href,
+        fbp: getCookie('_fbp'),
+        fbc: getCookie('_fbc')
+      };
+      const blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
+      if (navigator.sendBeacon){
+        navigator.sendBeacon(CAPI_ENDPOINT, blob);
+      } else {
+        fetch(CAPI_ENDPOINT, {method:'POST', body:blob, keepalive:true});
+      }
+    }catch(e){ /* fail silently, browser pixel already fired */ }
+  }
+
+  function setSealed(next){
+    sealed = next;
+    sealToggle.classList.toggle('is-sealed', sealed);
+    sealToggle.setAttribute('aria-pressed', String(sealed));
+
+    [ [ctaBtn, ctaLabel], [stickyBtn, stickyLabel] ].forEach(([btn,label])=>{
+      btn.classList.toggle('is-active', sealed);
+      label.textContent = sealed ? 'Falar no WhatsApp' : (btn===ctaBtn ? 'Confirme acima para continuar' : 'Confirme o interesse acima');
+    });
+
+    if (sealed && !qualifiedFired){
+      qualifiedFired = true;
+      const qid = uuid();
+      fbq('trackCustom', 'LeadQualificado', {content_name:'Excalibur - interesse em orçamento'}, {eventID: qid});
+      sendServerEvent('LeadQualificado', qid);
+    }
+  }
+
+  sealToggle.addEventListener('click', ()=> setSealed(!sealed));
+
+  function handleCtaClick(){
+    if (!sealed){
+      document.getElementById('sealToggle').scrollIntoView({behavior:'smooth', block:'center'});
+      sealToggle.animate(
+        [{transform:'translateX(0)'},{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(0)'}],
+        {duration:300}
+      );
+      return;
+    }
+    const eid = uuid();
+    fbq('track', 'Lead', {content_name:'Excalibur - clique WhatsApp'}, {eventID: eid});
+    sendServerEvent('Lead', eid);
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MSG);
+    setTimeout(()=>{ window.location.href = url; }, 120);
+  }
+
+  ctaBtn.addEventListener('click', handleCtaClick);
+  stickyBtn.addEventListener('click', handleCtaClick);
+
+  // Reforço de autoplay: alguns navegadores mobile não iniciam vídeos
+  // fora da dobra sozinhos. Isso força o play() assim que cada vídeo
+  // entra na tela (e pausa quando sai, economizando bateria/dados).
+  const videos = document.querySelectorAll('video');
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const v = entry.target;
+        if (entry.isIntersecting){
+          const p = v.play();
+          if (p && p.catch) p.catch(()=>{ /* navegador bloqueou, ignora */ });
+        } else {
+          v.pause();
+        }
+      });
+    }, {threshold: 0.25});
+    videos.forEach(v=> io.observe(v));
+  } else {
+    videos.forEach(v=>{
+      const p = v.play();
+      if (p && p.catch) p.catch(()=>{});
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

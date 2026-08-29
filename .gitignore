@@ -1,0 +1,13 @@
+# SO / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# variáveis de ambiente locais (não deve existir nada sensível aqui,
+# mas por garantia nunca versiona)
+.env
+.env.local
+
+# dependências, caso alguma ferramenta de build seja adicionada depois
+node_modules/
