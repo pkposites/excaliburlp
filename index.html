@@ -560,11 +560,12 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
       );
       return;
     }
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MSG);
+    window.open(url, '_blank', 'noopener');
+
     const eid = uuid();
     fbq('track', 'Lead', {content_name:'Excalibur - clique WhatsApp'}, {eventID: eid});
     sendServerEvent('Lead', eid);
-    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MSG);
-    setTimeout(()=>{ window.location.href = url; }, 120);
   }
 
   ctaBtn.addEventListener('click', handleCtaClick);
