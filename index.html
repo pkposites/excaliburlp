@@ -512,12 +512,35 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
     return m ? m.pop() : '';
   }
 
+  // Captura de atribuição: fbclid, UTMs e ids de campanha/conjunto/anúncio
+  // vindos da URL. Gravados uma vez em sessionStorage pra sobreviver a
+  // navegações dentro da LP e ir junto em todo evento (pixel + CAPI).
+  var ATTR_STORAGE_KEY = 'xlb_attr';
+  var ATTR_PARAMS = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','campaign_id','adset_id','ad_id'];
+
+  function captureAttribution(){
+    try{
+      var stored = JSON.parse(sessionStorage.getItem(ATTR_STORAGE_KEY) || '{}');
+      var params = new URLSearchParams(window.location.search);
+      var changed = false;
+      ATTR_PARAMS.forEach(function(key){
+        var value = params.get(key);
+        if (value){ stored[key] = value; changed = true; }
+      });
+      if (changed) sessionStorage.setItem(ATTR_STORAGE_KEY, JSON.stringify(stored));
+      return stored;
+    }catch(e){ return {}; }
+  }
+
+  var attribution = captureAttribution();
+
   function sendServerEvent(eventName, eventId){
     try{
       const payload = {
         pixel_id: PIXEL_ID,
         event_name: eventName,
         event_id: eventId,
+        attribution: attribution,
         event_source_url: window.location.href,
         fbp: getCookie('_fbp'),
         fbc: getCookie('_fbc')
