@@ -585,16 +585,11 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
       return;
     }
     const eid = uuid();
-    // Código curto de referência: liga esse clique (e o fbp/fbc dele) a um
-    // evento offline (lead qualificado/agendamento/venda) reportado depois,
-    // manualmente, quando a conversa no WhatsApp evoluir. Ver excalibur-capi.
-    const ref = eid.replace(/-/g, '').slice(0, 8).toUpperCase();
-    const msg = WHATSAPP_MSG + ' (Ref: ' + ref + ')';
-    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MSG);
     window.open(url, '_blank', 'noopener');
 
     fbq('track', 'Lead', {content_name:'Excalibur - clique WhatsApp'}, {eventID: eid});
-    sendServerEvent('Lead', eid, ref);
+    sendServerEvent('Lead', eid);
   }
 
   ctaBtn.addEventListener('click', handleCtaClick);
