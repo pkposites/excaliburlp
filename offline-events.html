@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excalibur — Reportar evento (uso interno)</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:420px;margin:40px auto;padding:0 16px;background:#14110d;color:#f4ecda;}
+  h1{font-size:18px;}
+  label{display:block;margin-top:14px;font-size:13px;opacity:.8;}
+  input,select{width:100%;padding:10px;margin-top:4px;border-radius:6px;border:1px solid #444;background:#1d1811;color:#f4ecda;box-sizing:border-box;}
+  button{width:100%;margin-top:20px;padding:12px;border-radius:6px;border:none;background:#c9a227;color:#14110d;font-weight:700;cursor:pointer;}
+  button:disabled{opacity:.6;cursor:default;}
+  #status{margin-top:14px;font-size:13px;white-space:pre-wrap;}
+  .ok{color:#8fd19e;} .err{color:#e08787;}
+</style>
+</head>
+<body>
+<h1>Reportar evento (uso interno)</h1>
+<p style="font-size:13px;opacity:.7">Preencha depois que o lead virar Lead Qualificado, Agendamento ou Venda. O código de referência é o que aparece na mensagem do WhatsApp ("Ref: XXXXXXXX").</p>
+
+<label>Token de acesso
+  <input id="token" type="password" autocomplete="off">
+</label>
+<label>Código de referência (opcional, mas recomendado)
+  <input id="ref" type="text" maxlength="8" placeholder="ex: AB12CD34" style="text-transform:uppercase">
+</label>
+<label>Evento
+  <select id="eventName">
+    <option value="LeadQualificado">Lead Qualificado</option>
+    <option value="Agendamento">Agendamento</option>
+    <option value="Venda">Venda</option>
+  </select>
+</label>
+<label>Telefone do cliente (com DDD)
+  <input id="phone" type="tel" placeholder="21999999999">
+</label>
+<label>E-mail do cliente (opcional)
+  <input id="email" type="email">
+</label>
+
+<button id="submitBtn">Enviar pra Meta</button>
+<div id="status"></div>
+
+<script>
+(function(){
+  var ENDPOINT = 'https://capi-excalibur.robson-oc96.workers.dev/offline-event';
+  var btn = document.getElementById('submitBtn');
+  var statusEl = document.getElementById('status');
+
+  btn.addEventListener('click', function(){
+    var token = document.getElementById('token').value.trim();
+    var ref = document.getElementById('ref').value.trim().toUpperCase();
+    var eventName = document.getElementById('eventName').value;
+    var phone = document.getElementById('phone').value.trim();
+    var email = document.getElementById('email').value.trim();
+
+    if (!token){ setStatus('Informe o token de acesso.', true); return; }
+    if (!phone && !email){ setStatus('Informe telefone ou e-mail.', true); return; }
+
+    btn.disabled = true;
+    setStatus('Enviando...', false);
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'X-Offline-Token': token},
+      body: JSON.stringify({ ref: ref || undefined, event_name: eventName, phone: phone || undefined, email: email || undefined })
+    })
+    .then(function(r){ return r.json().then(function(data){ return {ok:r.ok, data:data}; }); })
+    .then(function(res){
+      btn.disabled = false;
+      if (res.ok){
+        setStatus('Enviado! Ref casado: ' + (res.data.matched_ref ? 'sim' : 'não') + '\n' + JSON.stringify(res.data.meta), false);
+      } else {
+        setStatus('Erro: ' + JSON.stringify(res.data), true);
+      }
+    })
+    .catch(function(e){
+      btn.disabled = false;
+      setStatus('Falha de rede: ' + e, true);
+    });
+  });
+
+  function setStatus(msg, isError){
+    statusEl.textContent = msg;
+    statusEl.className = isError ? 'err' : 'ok';
+  }
+})();
+</script>
+</body>
+</html>
