@@ -534,6 +534,35 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
 
   var attribution = captureAttribution();
 
+  // Monta o bloco "Origem do lead:" pra ir junto na mensagem do WhatsApp,
+  // usando só o que a atribuição capturou (sem linhas vazias).
+  function buildLeadOriginBlock(attr){
+    var lines = [];
+
+    var canal = '';
+    if (attr.utm_source && attr.utm_medium) canal = attr.utm_source + ' / ' + attr.utm_medium;
+    else if (attr.utm_source) canal = attr.utm_source;
+    else if (attr.fbclid) canal = 'facebook / paid';
+    if (canal) lines.push('Canal: ' + canal);
+
+    var campanha = attr.utm_campaign || attr.campaign_id;
+    if (campanha) lines.push('Campanha: ' + campanha);
+
+    var conjunto = attr.utm_content || attr.adset_id;
+    if (conjunto) lines.push('Conjunto de anúncios: ' + conjunto);
+
+    var anuncio = attr.utm_term || attr.ad_id;
+    if (anuncio) lines.push('Anúncio: ' + anuncio);
+
+    var origem = '';
+    if (attr.fbclid) origem = 'Meta Ads (Facebook/Instagram)';
+    else if (attr.utm_source) origem = attr.utm_source;
+    if (origem) lines.push('Origem: ' + origem);
+
+    if (!lines.length) return '';
+    return '\n\nOrigem do lead:\n' + lines.join('\n');
+  }
+
   function sendServerEvent(eventName, eventId, ref){
     try{
       const payload = {
@@ -585,7 +614,8 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
       return;
     }
     const eid = uuid();
-    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MSG);
+    const fullMsg = WHATSAPP_MSG + buildLeadOriginBlock(attribution);
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(fullMsg);
     window.open(url, '_blank', 'noopener');
 
     fbq('track', 'Lead', {content_name:'Excalibur - clique WhatsApp'}, {eventID: eid});
