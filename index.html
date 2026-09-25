@@ -379,6 +379,61 @@
   }
   .sticky-btn svg{width:17px;height:17px;}
 
+  /* ---------- Lead Hub: modal de nome + WhatsApp ---------- */
+  .lh-overlay{
+    position:fixed; inset:0; z-index:60;
+    background:rgba(10,8,5,0.72);
+    backdrop-filter:blur(3px);
+    display:flex; align-items:flex-end; justify-content:center;
+    padding:18px;
+  }
+  @media (min-width:521px){
+    .lh-overlay{ align-items:center; }
+  }
+  .lh-modal{
+    width:100%; max-width:var(--maxw);
+    background:linear-gradient(165deg, var(--ink-3), var(--ink-2) 55%, var(--ink-2));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:26px 22px calc(22px + env(safe-area-inset-bottom));
+    box-shadow:0 24px 60px rgba(0,0,0,0.5);
+  }
+  .lh-modal-title{
+    font-family:'Cinzel', serif;
+    font-size:17px; color:var(--parchment); font-weight:600;
+    margin:0 0 16px; text-align:center;
+  }
+  .lh-field{ display:block; margin-bottom:14px; }
+  .lh-field span{
+    display:block; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--gold-light); margin-bottom:6px;
+  }
+  .lh-field input{
+    width:100%; padding:13px 14px;
+    border-radius:10px; border:1px solid var(--line);
+    background:rgba(0,0,0,0.25); color:var(--parchment);
+    font-family:'Manrope', sans-serif; font-size:15px;
+  }
+  .lh-field input:focus{ outline:none; border-color:rgba(201,162,39,0.65); }
+  .lh-consent{
+    font-size:11.5px; line-height:1.5; color:rgba(244,236,218,0.55);
+    margin:2px 0 16px;
+  }
+  .lh-consent a{ color:var(--gold-light); }
+  .lh-error{
+    font-size:12px; color:var(--gold-light); margin:-8px 0 14px;
+  }
+  .lh-cancel{
+    display:block; width:100%; margin-top:10px;
+    background:none; border:none;
+    font-family:'Manrope', sans-serif; font-size:13px;
+    color:rgba(244,236,218,0.5); cursor:pointer; text-align:center;
+  }
+  .lh-privacy-link{
+    display:inline-block; margin-top:12px;
+    font-size:11.5px; color:var(--gold-light);
+  }
+
   @media (min-width:521px){
     body{background:#0b0906;}
     .wrap{box-shadow:0 0 80px rgba(0,0,0,0.6);}
@@ -509,8 +564,28 @@
     <img src="assets/img/logo-mark.png" alt="Excalibur Festas e Eventos">
     <div class="fname">EXCALIBUR FESTAS &amp; EVENTOS</div>
     <div class="faddr">Santa Cruz da Serra · Duque de Caxias, RJ<br>Serviço de festas e entretenimento</div>
+    <a class="lh-privacy-link" href="https://leadinghub.netlify.app/privacidade/pk_27fc1b1dbe304a409651f26a01e92f9e" target="_blank" rel="noopener">Política de privacidade</a>
   </footer>
 
+</div>
+
+<!-- Lead Hub: passo curto de nome + WhatsApp antes de abrir a conversa -->
+<div class="lh-overlay" id="lhOverlay" hidden>
+  <div class="lh-modal" role="dialog" aria-modal="true" aria-labelledby="lhModalTitle">
+    <p class="lh-modal-title" id="lhModalTitle">Só mais um passo</p>
+    <label class="lh-field">
+      <span>Nome</span>
+      <input type="text" id="lhName" autocomplete="name" placeholder="Seu nome">
+    </label>
+    <label class="lh-field">
+      <span>WhatsApp com DDD</span>
+      <input type="tel" id="lhPhone" inputmode="numeric" autocomplete="tel" placeholder="(11) 91234-5678">
+    </label>
+    <p class="lh-consent">Ao continuar, você concorda em ser contatado pelo WhatsApp. Veja a <a href="https://leadinghub.netlify.app/privacidade/pk_27fc1b1dbe304a409651f26a01e92f9e" target="_blank" rel="noopener">Política de privacidade</a>.</p>
+    <p class="lh-error" id="lhError" hidden>Preencha nome e WhatsApp com DDD.</p>
+    <button type="button" class="cta-btn is-active" id="lhSubmit">Continuar para o WhatsApp</button>
+    <button type="button" class="lh-cancel" id="lhCancel">Cancelar</button>
+  </div>
 </div>
 
 <div class="sticky-bar">
@@ -529,6 +604,7 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('consent', 'revoke');
 fbq('init', '1916536729320394');
 fbq('track', 'PageView');
 </script>
@@ -536,6 +612,11 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel -->
+
+<!-- Lead Hub: registra cada contato de WhatsApp com a origem do anúncio,
+     respeitando LGPD (banner de consentimento próprio; libera o Pixel
+     acima só depois do aceite). -->
+<script src="https://leadinghub.netlify.app/tracker.js" data-key="pk_27fc1b1dbe304a409651f26a01e92f9e" data-consent="banner" async></script>
 
 <script>
 (function(){
@@ -663,6 +744,53 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
 
   sealToggle.addEventListener('click', ()=> setSealed(!sealed));
 
+  // Lead Hub: passo curto de nome + WhatsApp antes de abrir a conversa,
+  // pra alimentar a planilha de leads do atendente.
+  const lhOverlay = document.getElementById('lhOverlay');
+  const lhName = document.getElementById('lhName');
+  const lhPhone = document.getElementById('lhPhone');
+  const lhError = document.getElementById('lhError');
+  const lhSubmit = document.getElementById('lhSubmit');
+  const lhCancel = document.getElementById('lhCancel');
+  let lhOnConfirm = null;
+
+  function maskPhone(value){
+    const digits = value.replace(/\D/g, '').slice(0, 11);
+    if (digits.length > 10) return digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    if (digits.length > 6) return digits.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    if (digits.length > 2) return digits.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    if (digits.length > 0) return '(' + digits;
+    return '';
+  }
+  lhPhone.addEventListener('input', ()=>{ lhPhone.value = maskPhone(lhPhone.value); });
+
+  function openLeadModal(onConfirm){
+    lhName.value = '';
+    lhPhone.value = '';
+    lhError.hidden = true;
+    lhOnConfirm = onConfirm;
+    lhOverlay.hidden = false;
+    lhName.focus();
+  }
+  function closeLeadModal(){
+    lhOverlay.hidden = true;
+    lhOnConfirm = null;
+  }
+
+  lhSubmit.addEventListener('click', ()=>{
+    const name = lhName.value.trim();
+    const phoneDigits = lhPhone.value.replace(/\D/g, '');
+    if (!name || phoneDigits.length < 10){
+      lhError.hidden = false;
+      return;
+    }
+    const onConfirm = lhOnConfirm;
+    closeLeadModal();
+    if (onConfirm) onConfirm(name, lhPhone.value.trim());
+  });
+  lhCancel.addEventListener('click', closeLeadModal);
+  lhOverlay.addEventListener('click', (e)=>{ if (e.target === lhOverlay) closeLeadModal(); });
+
   function handleCtaClick(){
     if (!sealed){
       document.getElementById('sealToggle').scrollIntoView({behavior:'smooth', block:'center'});
@@ -672,13 +800,18 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
       );
       return;
     }
-    const eid = uuid();
-    const fullMsg = WHATSAPP_MSG + buildLeadOriginBlock(attribution);
-    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(fullMsg);
-    window.open(url, '_blank', 'noopener');
+    openLeadModal(function(name, phone){
+      const eid = uuid();
+      const fullMsg = WHATSAPP_MSG + buildLeadOriginBlock(attribution);
+      const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(fullMsg);
 
-    fbq('track', 'Lead', {content_name:'Excalibur - clique WhatsApp'}, {eventID: eid});
-    sendServerEvent('Lead', eid);
+      window.LeadHub?.identify({ name: name, phone: phone });
+      const destino = window.LeadHub ? window.LeadHub.whatsappUrl(url) : url;
+      window.open(destino, '_blank', 'noopener');
+
+      fbq('track', 'Lead', {content_name:'Excalibur - clique WhatsApp'}, {eventID: eid});
+      sendServerEvent('Lead', eid);
+    });
   }
 
   ctaBtn.addEventListener('click', handleCtaClick);
