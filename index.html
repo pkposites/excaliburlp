@@ -384,9 +384,11 @@
     position:fixed; inset:0; z-index:60;
     background:rgba(10,8,5,0.72);
     backdrop-filter:blur(3px);
-    display:flex; align-items:flex-end; justify-content:center;
+    align-items:flex-end; justify-content:center;
     padding:18px;
   }
+  .lh-overlay[hidden]{ display:none; }
+  .lh-overlay:not([hidden]){ display:flex; }
   @media (min-width:521px){
     .lh-overlay{ align-items:center; }
   }
