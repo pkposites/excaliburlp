@@ -6,6 +6,18 @@
 <title>Excalibur Festas e Eventos — Orçamento para o seu evento</title>
 <meta name="description" content="Casamentos e eventos corporativos em um espaço completo, há 15 anos em Santa Cruz da Serra, Duque de Caxias.">
 <link rel="icon" href="assets/img/logo-mark.png">
+<meta name="theme-color" content="#14110d">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Excalibur Festas e Eventos — Orçamento para o seu evento">
+<meta property="og:description" content="Casamentos e eventos corporativos em um espaço completo, há 15 anos em Santa Cruz da Serra, Duque de Caxias.">
+<meta property="og:image" content="https://excaliburfestas.netlify.app/assets/img/hero-poster.jpg">
+<meta property="og:url" content="https://excaliburfestas.netlify.app/">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Excalibur Festas e Eventos — Orçamento para o seu evento">
+<meta name="twitter:description" content="Casamentos e eventos corporativos em um espaço completo, há 15 anos em Santa Cruz da Serra, Duque de Caxias.">
+<meta name="twitter:image" content="https://excaliburfestas.netlify.app/assets/img/hero-poster.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -584,7 +596,7 @@
       <input type="tel" id="lhPhone" inputmode="numeric" autocomplete="tel" placeholder="(11) 91234-5678">
     </label>
     <p class="lh-consent">Ao continuar, você concorda em ser contatado pelo WhatsApp. Veja a <a href="https://leadinghub.netlify.app/privacidade/pk_27fc1b1dbe304a409651f26a01e92f9e" target="_blank" rel="noopener">Política de privacidade</a>.</p>
-    <p class="lh-error" id="lhError" hidden>Preencha nome e WhatsApp com DDD.</p>
+    <p class="lh-error" id="lhError" role="alert" aria-live="polite" hidden>Preencha nome e WhatsApp com DDD.</p>
     <button type="button" class="cta-btn is-active" id="lhSubmit">Continuar para o WhatsApp</button>
     <button type="button" class="lh-cancel" id="lhCancel">Cancelar</button>
   </div>
@@ -755,6 +767,7 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
   const lhSubmit = document.getElementById('lhSubmit');
   const lhCancel = document.getElementById('lhCancel');
   let lhOnConfirm = null;
+  let lhTriggerEl = null;
 
   function maskPhone(value){
     const digits = value.replace(/\D/g, '').slice(0, 11);
@@ -771,13 +784,19 @@ src="https://www.facebook.com/tr?id=1916536729320394&ev=PageView&noscript=1"
     lhPhone.value = '';
     lhError.hidden = true;
     lhOnConfirm = onConfirm;
+    lhTriggerEl = document.activeElement;
     lhOverlay.hidden = false;
     lhName.focus();
   }
   function closeLeadModal(){
     lhOverlay.hidden = true;
     lhOnConfirm = null;
+    if (lhTriggerEl) lhTriggerEl.focus();
+    lhTriggerEl = null;
   }
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape' && !lhOverlay.hidden) closeLeadModal();
+  });
 
   lhSubmit.addEventListener('click', ()=>{
     const name = lhName.value.trim();
